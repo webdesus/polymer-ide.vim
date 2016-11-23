@@ -27,5 +27,5 @@ Plug 'webdesus/polymer-ide.vim'
 ## For more information, read documentation
 
 ```
-h: polymer_ide
+:h polymer_ide
 ```
