@@ -8,6 +8,7 @@ let s:processes = {}
 let s:handlers = {}
 let s:polymer_signs = {} 
 let s:plugin_path = expand('<sfile>:h')  
+let s:last_completed_items = [] 
 
 function! s:_on_stdout(ch, msg)
 	if !empty(a:msg) 
@@ -26,13 +27,16 @@ endfunction
 
 function! s:get_process(cur_folder)
 	if !has_key(s:processes, a:cur_folder) 
-			let job  = job_start(['node', s:plugin_path . '/../node_modules/polymer-analyzer/lib/editor-service/polymer-editor-server.js'], {'callback': function('s:_on_stdout')})	
+			let job  = job_start(['node', s:plugin_path . '/../node_modules/polymer-editor-service/lib/polymer-editor-server.js'], {'callback': function('s:_on_stdout')})	
 			let s:processes[a:cur_folder] = { 'job': job, 'cmd_id': 0, 'chanel': job_getchannel(job) }
 			call s:make_project_processes(a:cur_folder)
 			call ch_readraw(s:processes[a:cur_folder].chanel)
 			augroup bufferModified
 				autocmd!
 				autocmd TextChangedI,BufWritePost <buffer> call s:bufferModified()
+				if exists('g:polymer_ide#use_snippets') && g:polymer_ide#use_snippets
+					autocmd TextChangedI  <buffer> call s:CompleteDone()
+				endif
 				if exists('g:polymer_ide#on_buffer_text_change') && g:polymer_ide#on_buffer_text_change 
 					autocmd TextChanged <buffer> call s:bufferModified()
 				endif
@@ -45,6 +49,30 @@ function! s:get_process(cur_folder)
 		let process.chanel = job_getchannel(process.job)
 		return process
 	endif
+endfunction
+
+function! s:CompleteDone()
+	if len(s:last_completed_items) == 0
+		return
+	endif	
+  if !exists('v:completed_item') || empty(v:completed_item)
+		if len(s:last_completed_items) == 1
+			let completed_item = s:last_completed_items[0]
+		else
+			return
+		endif
+	else
+		let completed_item = v:completed_item
+  endif
+
+	let s:last_completed_items = []
+	let complete_str = completed_item.word
+  if complete_str == ''
+    return
+  endif
+
+	call UltiSnips#Anon(complete_str, complete_str)
+	return 
 endfunction
 
 function! s:send_command(msg, handler)
@@ -179,7 +207,12 @@ function! polymer_ide#Complete(findstart, complWord)
 						if description != '' && len(description) > 62 
 							let description = strpart(el.description, 0, 59) . '...'
 						endif
-						call add(result, {'abbr': '<' . el.tagname . '>', 'word': el.expandTo, 'menu': description})
+						if exists('g:polymer_ide#use_snippets') && g:polymer_ide#use_snippets
+							let word = el.expandToSnippet
+						else
+							let word = el.expandTo
+						endif
+						call add(result, {'abbr': '<' . el.tagname . '>', 'word': word, 'menu': description})
 					endif
 				endfor
 			elseif definition.resolution.kind == 'attributes'
@@ -198,6 +231,7 @@ function! polymer_ide#Complete(findstart, complWord)
 				endfor
 			endif
 		endif
+		let s:last_completed_items = result
 		return result 
 	endif
 endfunction
@@ -208,6 +242,5 @@ function! polymer_ide#Enable()
 	call s:bufferModified()
 endfunction
 "public }}
-
 
 

@@ -10,7 +10,7 @@
     "tests"
   ],
   "dependencies": {
-    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
-    "iron-elements": "PolymerElements/iron-elements#^1.0.10"
+    "paper-button": "PolymerElements/paper-button#2.0-preview",
+    "paper-spinner": "PolymerElements/paper-spinner#2.0-preview"
   }
 }

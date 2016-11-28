@@ -1,4 +1,4 @@
-*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2016-11-23
+*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2016-11-28
 
 		    POLYMER_IDE REFERENCE MANUAL	by webdesus~
 
@@ -33,11 +33,15 @@ more info, including links to other editor plugins.
 
 - Vim version 8.0 and above support;
 - node.js; 
+- UltiSnips(option) for supprots snippets;
 
 1.3 Download					*polymer_ide-download*
 
 You can download the lastest version from this url:
 	https://github.com/webdesus/polymer_ide.vim
+
+For work using snippets needed install UltiSnips from this url:
+	https://github.com/SirVer/ultisnips
 
 1.4 Install					*polymer_ide-install*
 
@@ -93,7 +97,10 @@ user does not expect or that is slow. >
 
   let g:polymer_ide#on_buffer_text_change = 1
 <
-
+* Enable snippets support. 
+Careful: For successful work required installed plugin UltiSnips  >
+  let g:polymer_ide#use_snippets = 1
+<
 2.2 Methods					 *polymer_ide-methods*
 
 
@@ -124,6 +131,7 @@ in preview window.
 ==============================================================================
 3. History					 *polymer_ide-history*
 
+  v0.2 2016-11-28       Support snippets	
   v0.1 2016-11-23	First release
 
 ==============================================================================
@@ -131,7 +139,6 @@ in preview window.
 
 -  Go to definition various open file(like tab, like vertical buffer and etc)
 -  Get references for element
--  Snippets
 -  Write tests
 -  etc...
 

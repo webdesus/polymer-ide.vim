@@ -1,6 +1,6 @@
 {
   "name": "polymer-ide.vim",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provides linting, autocompletion, and more for web components.",
   "author": "Denis Kurilenko",
   "license": "MIT",
@@ -9,6 +9,6 @@
     "url": "git://github.com/webdesus/polymer-ide.vim"
   },
   "dependencies": {
-    "polymer-analyzer": "^2.0.0-alpha.9"
+    "polymer-editor-service": "=1.1.1"
   }
 }
