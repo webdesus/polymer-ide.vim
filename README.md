@@ -1,6 +1,6 @@
 # Polymer IDE for Vim 
 
-This is polymer_ide plugin for vim version 8.0 and above. This plugin unlocks all of the power of the [Polymer Analyzer] in vim. See [Polymer Editor Service] for more info, including links to other editor plugins.
+This is polymer_ide plugin for vim version 8.0 and above. This plugin unlocks all of the power of the [Polymer Analyzer](https://github.com/Polymer/polymer-analyzer) in vim. See [Polymer Editor Service](https://github.com/Polymer/polymer-editor-service) for more info, including links to other editor plugins.
 
 Features:
 
@@ -27,5 +27,5 @@ Plug 'webdesus/polymer-ide.vim'
 ## For more information, read documentation
 
 ```
-h: polymer_ide
+:h polymer_ide
 ```
