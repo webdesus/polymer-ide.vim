@@ -1,4 +1,4 @@
-*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2016-11-28
+*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2016-11-29
 
 		    POLYMER_IDE REFERENCE MANUAL	by webdesus~
 
@@ -58,8 +58,8 @@ Adapt for your plugin manager of choice. Put this into your `.vimrc`. >
 
       Go to definition using {F12} key: >
 
-	 autocmd Filetype html nmap <F12> :call polymer_ide#GoToDefinition()<CR>
-	 autocmd Filetype html imap <F12> :call polymer_ide#GoToDefinition()<CR>
+	 autocmd Filetype html nmap <F12> :call polymer_ide#GoToDefinition(':vs')<CR>
+	 autocmd Filetype html imap <F12> :call polymer_ide#GoToDefinition(':vs')<CR>
 <
       Show documentation about tag or attribute using {F1} key: >
 
@@ -119,10 +119,9 @@ Careful: For successful work required installed plugin UltiSnips  >
 * polymer_ide#PreviousError()                    *polymer_ide#PreviousError*
 	Move cursor to previous error and show error message in console.
 
-* polymer_ide#GoToDefinition()                   *polymer_ide#GoToDefinition*
-	Open file with definition element under cursor. Now file opened using
-vsplit window, but future we want add various options for opening (for more
-details see |polymer_ide-todo|).
+* polymer_ide#GoToDefinition({cmd})              *polymer_ide#GoToDefinition*
+	Open file with definition element under cursor.{cmd} might have all
+various open file(like tab (see |:tabnew|) , like vertical buffer(see |:vs|) and etc)
 
 * polymer_ide#ShowDocumentation()                *polymer_ide#ShowDocumentation*
 	Show documentation information about element or attribute under cursor 
@@ -131,13 +130,14 @@ in preview window.
 ==============================================================================
 3. History					 *polymer_ide-history*
 
+  v0.3 2016-11-29       Added support various opening file when using method 
+"go to definition" 
   v0.2 2016-11-28       Support snippets	
   v0.1 2016-11-23	First release
 
 ==============================================================================
 4. Todo					         *polymer_ide-todo*
 
--  Go to definition various open file(like tab, like vertical buffer and etc)
 -  Get references for element
 -  Write tests
 -  etc...

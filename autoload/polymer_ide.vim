@@ -14,7 +14,7 @@ function! s:_on_stdout(ch, msg)
 	if !empty(a:msg) 
 		let msg = json_decode(a:msg)
 		if exists('s:handlers['. msg.id .']')
-			call s:handlers[msg.id](msg.value)	
+			call s:handlers[msg.id].func(msg.value, s:handlers[msg.id].args)	
 			unlet s:handlers[msg.id] 
 		endif
 	endif
@@ -75,13 +75,13 @@ function! s:CompleteDone()
 	return 
 endfunction
 
-function! s:send_command(msg, handler)
+function! s:send_command(msg, handler, ...)
 	let process = s:get_process(getcwd())
 	let process.cmd_id += 1
 	let msg = {'id': process.cmd_id, 'value': a:msg}
   call ch_sendraw(process.chanel, json_encode(msg) . "\n")
 	if !empty(a:handler)
-		 let s:handlers[process.cmd_id] = function(a:handler)
+		let s:handlers[process.cmd_id] = {'func': function(a:handler), 'args':a:000}
 	endif
 endfunction
 
@@ -89,7 +89,7 @@ function! s:make_project_processes(path)
 	call s:send_command({'kind': 'init', 'basedir': a:path},'')
 endfunction
 
-function! s:show_warnings(data)
+function! s:show_warnings(data, ...)
 	if a:data.kind != 'resolution'
 		return
 	endif
@@ -109,17 +109,17 @@ function! s:show_warnings(data)
 	endfor
 endfunction
 
-function! s:go_to_definition(data)
+function! s:go_to_definition(data, args)
 	if a:data.kind != 'resolution'
 		return
 	endif
 	if has_key(a:data, 'resolution')
-		exe ':vs '. getcwd() . '/' . a:data.resolution.file
+		exe a:args[0] . ' ' . getcwd() . '/' . a:data.resolution.file
 		call cursor(a:data.resolution.start.line+1, a:data.resolution.start.column+1)
 	endif
 endfunction
 
-function! s:go_to_documentation(data)
+function! s:go_to_documentation(data, ...)
 	if a:data.kind != 'resolution'
 		return
 	endif
@@ -150,8 +150,8 @@ function! polymer_ide#ShowDocumentation()
 	call s:send_command({'kind': 'getDocumentationFor', 'localPath': expand('%'), 'position': {'line': line('.') - 1, 'column': col('.') - 1}}, 's:go_to_documentation')
 endfunction
 
-function! polymer_ide#GoToDefinition()
-	call s:send_command({'kind': 'getDefinitionFor', 'localPath': expand('%'), 'position': {'line': line('.') - 1, 'column': col('.') - 1}}, 's:go_to_definition')
+function! polymer_ide#GoToDefinition(cmd)
+	call s:send_command({'kind': 'getDefinitionFor', 'localPath': expand('%'), 'position': {'line': line('.') - 1, 'column': col('.') - 1}}, 's:go_to_definition', a:cmd)
 endfunction
 
 function! polymer_ide#ShowError(line)
@@ -242,5 +242,4 @@ function! polymer_ide#Enable()
 	call s:bufferModified()
 endfunction
 "public }}
-
 
