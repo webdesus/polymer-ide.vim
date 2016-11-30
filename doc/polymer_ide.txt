@@ -26,7 +26,7 @@ more info, including links to other editor plugins.
 
 - typeahead completions for imported elements, with documentation;
 - typeahead completions for element attributes, with documentation;
-- inline errors (squiggle underlines);
+- inline errors (marks on lines);
 - jump to definition support for custom elements and attributes;
 
 1.2 Requirements				*polymer_ide-requirements*
