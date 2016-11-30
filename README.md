@@ -4,12 +4,17 @@ This is polymer_ide plugin for vim version 8.0 and above. This plugin unlocks al
 
 Features:
 
- * typeahead completions for imported elements, with documentation
- * typeahead completions for element attributes, with documentation
- * inline errors (squiggle underlines)
- * jump to definition support for custom elements and attributes
+ * typeahead completions for imported elements, with documentation [pic](#Completions_with_documentation)
+ * typeahead completions for element attributes, with documentation [pic](#Completions_with_documentation)
+ * inline errors (marks on lines) [pic](#Navigation_by_errors)
+ * jump to definition support for custom elements and attributes [pic](#Go_to_definition)
 
+## Requirements
 
+ * Vim version 8.0 and above support;
+ * node.js; 
+ * UltiSnips(option) for supprots snippets;
+ 
 ## Installation
 
 Use your favorite package manager
@@ -23,9 +28,31 @@ For example, if you're using vim-plug, add the following line to `~/.vimrc`:
 ```
 Plug 'webdesus/polymer-ide.vim'
 ```
+Then go to plugin folder and execute 
+```
+npm install
+```
 
+For work using snippets needed install UltiSnips from this https://github.com/SirVer/ultisnips
+  
 ## For more information, read documentation
 
 ```
 :h polymer_ide
 ```
+## Features in a gif
+
+### Completions with documentation <a name="Completions_with_documentation"></a>
+![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Completions.gif)
+
+### Navigation by errors <a name="Navigation_by_errors"></a>
+![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Errors.gif)
+
+### Go to definition <a name="Go_to_definition"></a>
+![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Go to definition.gif)
+
+## Todo
+
+ * Get references for element
+ * Write tests
+ * etc...
