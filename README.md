@@ -42,13 +42,13 @@ For work using snippets needed install UltiSnips from this https://github.com/Si
 ```
 ## Features in a gif
 
-### Completions with documentation <a name="Completions_with_documentation"></a>
+### <a name="Completions_with_documentation"></a> Completions with documentation 
 ![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Completions.gif)
 
-### Navigation by errors <a name="Navigation_by_errors"></a>
+### <a name="Navigation_by_errors"></a> Navigation by errors 
 ![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Errors.gif)
 
-### Go to definition <a name="Go_to_definition"></a>
+### <a name="Go_to_definition"></a> Go to definition 
 ![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Go to definition.gif)
 
 ## Todo
