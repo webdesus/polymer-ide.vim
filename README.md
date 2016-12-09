@@ -53,6 +53,10 @@ For work using snippets needed install UltiSnips from this https://github.com/Si
 
 ## Todo
 
- * Get references for element
- * Write tests
+ * Get references for element [#1](https://github.com/webdesus/polymer-ide.vim/issues/1)
+ * Linting [#2](https://github.com/webdesus/polymer-ide.vim/issues/2)
+ * Better highlight [#3](https://github.com/webdesus/polymer-ide.vim/issues/3)
+ * Write tests [#4](https://github.com/webdesus/polymer-ide.vim/issues/4)
  * etc...
+
+## If you wanna help with plugin, please before beginning, inform about your intention(create issues or comment existing). That other people do not do double job.

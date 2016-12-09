@@ -139,6 +139,8 @@ in preview window.
 4. Todo					         *polymer_ide-todo*
 
 -  Get references for element
+-  Linting
+-  Better highlight
 -  Write tests
 -  etc...
 
