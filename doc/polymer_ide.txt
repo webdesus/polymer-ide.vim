@@ -130,6 +130,7 @@ in preview window.
 ==============================================================================
 3. History					 *polymer_ide-history*
 
+  v0.3.1 2016-12-11     Fixed remove signs on a fields 
   v0.3 2016-11-29       Added support various opening file when using method 
 "go to definition" 
   v0.2 2016-11-28       Support snippets	
