@@ -6,7 +6,7 @@
 
 let s:processes = {}
 let s:handlers = {}
-let s:polymer_signs = {} 
+let b:polymer_signs = {} 
 let s:plugin_path = expand('<sfile>:h')  
 let s:last_completed_items = [] 
 
@@ -95,15 +95,15 @@ function! s:show_warnings(data, ...)
 	endif
 	let sign_name = 'polymer_analyzer'
 	exe ':sign define '. sign_name .' text=>> texthl=Error'
-	let old_signs = s:polymer_signs
-	let s:polymer_signs = {} 
+	let old_signs = b:polymer_signs
+	let b:polymer_signs = {} 
 	for warning in a:data.resolution
 		let line = warning.sourceRange.start.line + 1
-		let s:polymer_signs[line] = {'line': line, 'message': warning.message}
+		let b:polymer_signs[line] = {'line': line, 'message': warning.message}
 		exe ':sign place '. line .' line='. line .' name='. sign_name .' file=' . expand('%:p') 
 	endfor
 	for s in items(old_signs) 
-		if !has_key(s:polymer_signs, s[0])
+		if !has_key(b:polymer_signs, s[0])
 			exe ':sign unplace '. s[0] .' file='. expand('%:p')
 		endif
 	endfor
@@ -139,7 +139,7 @@ endfunction
 
 
 function! s:get_polymer_signs()
-	let result = keys(s:polymer_signs)
+	let result = keys(b:polymer_signs)
 	call map(result, 'str2nr(v:val)')
 	call sort(result)
 	return result
@@ -155,9 +155,9 @@ function! polymer_ide#GoToDefinition(cmd)
 endfunction
 
 function! polymer_ide#ShowError(line)
-	if has_key(s:polymer_signs, a:line)
+	if has_key(b:polymer_signs, a:line)
 		call cursor(a:line, 0)
-		silent echohl Error | echo s:polymer_signs[a:line].message | echohl None
+		silent echohl Error | echo b:polymer_signs[a:line].message | echohl None
 	endif
 endfunction
 
@@ -237,6 +237,7 @@ function! polymer_ide#Complete(findstart, complWord)
 endfunction
 
 function! polymer_ide#Enable()
+	let b:polymer_signs = {} 
 	setlocal omnifunc=polymer_ide#Complete
 	exe ':cd ' . getcwd()
 	call s:bufferModified()
