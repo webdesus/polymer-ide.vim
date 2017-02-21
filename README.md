@@ -26,7 +26,7 @@ or add this directory to your Vim runtime path.
 For example, if you're using Vundle, add the following line to `~/.vimrc`:
 
 ```
-Pluging 'webdesus/polymer-ide.vim'
+Plugin 'webdesus/polymer-ide.vim'
 ```
 Then go to plugin folder and execute 
 ```
