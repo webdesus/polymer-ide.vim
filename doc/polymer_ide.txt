@@ -1,4 +1,4 @@
-*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2016-11-29
+*polymer_ide.txt*	For Vim version 8.0 and above. Last change: 2017-02-28
 
 		    POLYMER_IDE REFERENCE MANUAL	by webdesus~
 
@@ -34,6 +34,7 @@ more info, including links to other editor plugins.
 - Vim version 8.0 and above support;
 - node.js; 
 - UltiSnips(option) for supprots snippets;
+- Syntax(option);
 
 1.3 Download					*polymer_ide-download*
 
@@ -100,6 +101,11 @@ user does not expect or that is slow. >
 * Enable snippets support. 
 Careful: For successful work required installed plugin UltiSnips  >
   let g:polymer_ide#use_snippets = 1
+
+* Enable Syntastic support. 
+Careful: For successful work required installed plugin Syntastic   >
+  let g:polymer_ide#use_syntastic = 1
+
 <
 2.2 Methods					 *polymer_ide-methods*
 

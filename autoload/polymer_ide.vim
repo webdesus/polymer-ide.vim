@@ -22,7 +22,11 @@ endfunction
 
 function! s:bufferModified()
 	call s:send_command({'kind': 'fileChanged', 'localPath': expand('%'), 'contents': join(getline(1,'$'), "\n")},'')
-	call s:send_command({'kind': 'getWarningsFor', 'localPath': expand('%') },'s:show_warnings')
+	if exists('g:polymer_ide#use_syntastic') && g:polymer_ide#use_syntastic 
+		call s:send_command({'kind': 'getWarningsFor', 'localPath': expand('%') },'s:set_warnings')
+	else
+		call s:send_command({'kind': 'getWarningsFor', 'localPath': expand('%') },'s:show_warnings')
+	endif
 endfunction
 
 function! s:get_process(cur_folder)
@@ -89,6 +93,17 @@ function! s:make_project_processes(path)
 	call s:send_command({'kind': 'init', 'basedir': a:path},'')
 endfunction
 
+function! s:set_warnings(data, ...)
+	if a:data.kind != 'resolution'
+		return
+	endif
+	for warning in a:data.resolution
+		let line = warning.sourceRange.start.line + 1
+		let column = warning.sourceRange.end.column - 1
+		let b:polymer_signs[line] = {'line': line, 'col':column, 'message': warning.message}
+	endfor
+
+endfunction
 function! s:show_warnings(data, ...)
 	if a:data.kind != 'resolution'
 		return
