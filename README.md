@@ -24,15 +24,21 @@ Use your favorite package manager
 [pathogen.vim](https://github.com/tpope/vim-pathogen)),
 or add this directory to your Vim runtime path.
 
-For example, if you're using vim-plug, add the following line to `~/.vimrc`:
+For example, if you're using Vundle, add the following line to `~/.vimrc`:
 
 ```
-Plug 'webdesus/polymer-ide.vim'
+Plugin 'webdesus/polymer-ide.vim'
 ```
 Then go to plugin folder and execute 
 ```
 npm install
 ```
+
+If you using **vim-plug** then you write next
+```
+Plug  'webdesus/polymer-ide.vim', { 'do': 'npm install' }
+``` 
+And npm install execute automatically after install plugin.
 
 For work using snippets needed install UltiSnips from this https://github.com/SirVer/ultisnips
   
