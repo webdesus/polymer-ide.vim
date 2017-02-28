@@ -105,6 +105,7 @@ Careful: For successful work required installed plugin UltiSnips  >
 * Enable Syntastic support. 
 Careful: For successful work required installed plugin Syntastic   >
   let g:polymer_ide#use_syntastic = 1
+  let g:syntastic_html_checkers = [ 'polylint']
 
 <
 2.2 Methods					 *polymer_ide-methods*
