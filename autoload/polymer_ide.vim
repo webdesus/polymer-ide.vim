@@ -39,7 +39,7 @@ function! s:get_process(cur_folder)
 				autocmd!
 				autocmd TextChangedI,BufWritePost <buffer> call s:bufferModified()
 				if exists('g:polymer_ide#use_snippets') && g:polymer_ide#use_snippets
-					autocmd TextChangedI  <buffer> call s:CompleteDone()
+					autocmd CompleteDone * call s:CompleteDone() 
 				endif
 				if exists('g:polymer_ide#on_buffer_text_change') && g:polymer_ide#on_buffer_text_change 
 					autocmd TextChanged <buffer> call s:bufferModified()
@@ -258,4 +258,5 @@ function! polymer_ide#Enable()
 	call s:bufferModified()
 endfunction
 "public }}
+
 
