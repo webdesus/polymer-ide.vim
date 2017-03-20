@@ -137,6 +137,7 @@ in preview window.
 ==============================================================================
 3. History					 *polymer_ide-history*
 
+  v0.4.3 2017-03-20     Fixed problem snippets for YouCompleteMe
   v0.4.2 2017-03-06     Fixed problem install polymer-editor-service
   v0.4.1 2017-02-28     Little changes docs
   v0.4 2017-02-28     	Integration with Syntastic  
