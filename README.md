@@ -56,7 +56,7 @@ For work using snippets needed install UltiSnips from this https://github.com/Si
 ![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Errors.gif)
 
 ### <a name="Go_to_definition"></a> Go to definition 
-![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Go to definition.gif)
+![preview](https://github.com/webdesus/polymer-ide.vim/raw/gh-pages/img/Go_to_definition.gif)
 
 ## Todo
 
