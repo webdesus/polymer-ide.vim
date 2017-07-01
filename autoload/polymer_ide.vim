@@ -9,6 +9,7 @@ let s:handlers = {}
 let b:polymer_signs = {} 
 let s:plugin_path = expand('<sfile>:h')  
 let s:last_completed_items = [] 
+let s:server_path =s:plugin_path .'/../node_modules/polymer-editor-service/lib/polymer-editor-server.js'
 
 function! s:_on_stdout(ch, msg)
 	if !empty(a:msg) 
@@ -31,23 +32,23 @@ endfunction
 
 function! s:get_process(cur_folder)
 	if !has_key(s:processes, a:cur_folder) 
-			let job  = job_start(['node', s:plugin_path . '/../node_modules/polymer-editor-service/lib/polymer-editor-server.js'], {'callback': function('s:_on_stdout')})	
-			let s:processes[a:cur_folder] = { 'job': job, 'cmd_id': 0, 'chanel': job_getchannel(job) }
-			call s:make_project_processes(a:cur_folder)
-			call ch_readraw(s:processes[a:cur_folder].chanel)
-			augroup bufferModified
-				autocmd!
-				autocmd TextChangedI,BufWritePost <buffer> call s:bufferModified()
-				if exists('g:polymer_ide#use_snippets') && g:polymer_ide#use_snippets
-					autocmd CompleteDone * call s:CompleteDone() 
-				endif
-				if exists('g:polymer_ide#on_buffer_text_change') && g:polymer_ide#on_buffer_text_change 
-					autocmd TextChanged <buffer> call s:bufferModified()
-				endif
-			augroup END
-			let process = s:processes[a:cur_folder]
-			let process.chanel = job_getchannel(process.job)
-			return process	 
+		let job  = job_start(['node', s:server_path ], {'callback': function('s:_on_stdout')})	
+		let s:processes[a:cur_folder] = { 'job': job, 'cmd_id': 0, 'chanel': job_getchannel(job) }
+		call s:make_project_processes(a:cur_folder)
+		call ch_readraw(s:processes[a:cur_folder].chanel)
+		augroup bufferModified
+			autocmd!
+			autocmd TextChangedI,BufWritePost <buffer> call s:bufferModified()
+			if exists('g:polymer_ide#use_snippets') && g:polymer_ide#use_snippets
+				autocmd CompleteDone * call s:CompleteDone() 
+			endif
+			if exists('g:polymer_ide#on_buffer_text_change') && g:polymer_ide#on_buffer_text_change 
+				autocmd TextChanged <buffer> call s:bufferModified()
+			endif
+		augroup END
+		let process = s:processes[a:cur_folder]
+		let process.chanel = job_getchannel(process.job)
+		return process	 
 	else	
 		let process = s:processes[a:cur_folder]
 		let process.chanel = job_getchannel(process.job)
@@ -252,10 +253,15 @@ function! polymer_ide#Complete(findstart, complWord)
 endfunction
 
 function! polymer_ide#Enable()
-	let b:polymer_signs = {} 
-	setlocal omnifunc=polymer_ide#Complete
-	exe ':cd ' . getcwd()
-	call s:bufferModified()
+		if !filereadable(s:server_path)
+			echoerr 'You forgot execute "npm install" command!'
+			return 0
+		else
+			let b:polymer_signs = {} 
+			setlocal omnifunc=polymer_ide#Complete
+			exe ':cd ' . getcwd()
+			call s:bufferModified()
+		endif
 endfunction
 "public }}
 
