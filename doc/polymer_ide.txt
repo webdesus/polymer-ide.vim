@@ -137,6 +137,7 @@ in preview window.
 ==============================================================================
 3. History					 *polymer_ide-history*
 
+  v0.4.5 2017-08-08     Fixed mac install problem
   v0.4.4 2017-07-01     Show error when user forgot execute "npm install" command 
   v0.4.3 2017-03-20     Fixed problem snippets for YouCompleteMe
   v0.4.2 2017-03-06     Fixed problem install polymer-editor-service

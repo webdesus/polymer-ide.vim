@@ -1,6 +1,6 @@
 {
   "name": "polymer-ide.vim",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Provides linting, autocompletion, and more for web components.",
   "author": "Denis Kurilenko",
   "license": "MIT",
