@@ -13,7 +13,11 @@ let s:server_path =s:plugin_path .'/../node_modules/polymer-editor-service/lib/p
 
 function! s:_on_stdout(ch, msg)
 	if !empty(a:msg) 
-		let msg = json_decode(a:msg)
+        try
+            let msg = json_decode(a:msg)
+        catch
+            return
+        endtry
 		if exists('s:handlers['. msg.id .']')
 			call s:handlers[msg.id].func(msg.value, s:handlers[msg.id].args)	
 			unlet s:handlers[msg.id] 
